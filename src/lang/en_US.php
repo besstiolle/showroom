@@ -12,7 +12,7 @@ $lang['text_form'] = '
 <p>Vous pouvez ajouter autant de site web que vous le souhaitez. Cependant ils doivent se conformer &agrave; certaines r&egrave;gles :</p>
 <ul>
 <li>Le site doit avoir &eacute;t&eacute; fait avec Cms Made Simple</li>
-<li>Le site doit avoir un son propre design</li>
+<li>Le site doit avoir son propre design</li>
 <li>Le site doit respecter la <a href="http://fr.wikipedia.org/wiki/N%C3%A9tiquette">netiquette</a></li>
 <li>Le site doit respecter la <span style="cursor:help;" title="Doit &ecirc;tre pr&eacute;sent dans le code source g&eacute;n&eacute;r&eacute; : &lt;meta name=&quot;generator&quot; content=&quot;CMS Made Simple - [...]&quot; /&gt;">licence GPL de Cms Made Simple [+ d\'info]</span></li>
 </ul>
@@ -20,9 +20,15 @@ $lang['text_form'] = '
 ';
 $lang['submit_url'] = 'Proposer le site';
 
-$lang['title_last'] = 'Derniers ajouts sur le ShowRoom';
-$lang['title_categories'] = 'Recherche par Cat&eacute;gorie';
-$lang['title_by_categorie'] = 'R&eacute;sultat de la recherche : %s';
+$lang['title_last'] = 'Les derniers ajouts sur le ShowRoom';
+$lang['title_categories'] = 'Filtre par Cat&eacute;gorie';
+$lang['title_by_categorie'] = '%s';
+$lang['title_sites'] = 'G&eacute;rer les sites';
+$lang['title_import'] = 'Importer en masse';
+$lang['title_check'] = 'V&eacute;rifier en masse';
+
+
+
 
 
 
@@ -32,15 +38,17 @@ $lang['categorie_empty'] = 'Cat&eacute;gorie non renseign&eacute;e';
 $lang['url_already_exist'] = 'Le site renseign&eacute; existe d&eacute;j&agrave; dans nos bases';
 $lang['url_non_regex'] = 'Veuillez saisir une url valide';
 $lang['url_non_exist'] = 'Le site n\'est pas joignable';
-$lang['url_non_cmsms'] = 'Le site n\'est pas fait avec Cms Made Simple ou ne respecte pas sa licence';
-
-
-
+$lang['url_non_cmsms'] = 'Le site n\'est pas fait avec Cms Made Simple';
+$lang['url_licence_pirate'] = 'Le site ne respecte pas sa licence !';
 
 
 $lang['url_added'] = 'Site ajout&eacute; avec succ&egrave;s. Il apparaitra d&egrave;s la prochaine vague de validation :)';
 
-
+$lang['th_id'] = 'ID';
+$lang['th_miniature'] = 'miniature';
+$lang['th_url'] = 'url';
+$lang['th_state'] = '&Ecirc;tat';
+$lang['th_categorie'] = 'Cat&eacute;gorie';
 
 
 

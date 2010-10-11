@@ -34,38 +34,118 @@ if (!isset($gCms)) exit;
 
 
 // Verification de la permission
-if (! $this->CheckPermission('Set Open Statistics Community Prefs')) {
+if (! $this->CheckPermission('Set ShowRoom Prefs')) {
   return $this->DisplayErrorPage($id, $params, $returnid,$this->Lang('accessdenied'));
 }
 
-$tab = '';
-if (FALSE == empty($params['active_tab'])) $tab = $params['active_tab'];
+(empty($params['active_tab'])?$tab = '':$tab = $params['active_tab']);
+(empty($params['categorieSites'])?$filtreCategorie = null:$filtreCategorie = $params['categorieSites']);
 
-$key = $this->getKey();
-$config =& $gCms->GetConfig();
-$url = $config['root_url'];
-if(strpos($url, 'localhost') !== FALSE)
-{
-	$url = 'http://www.cmsmadesimple.fr';
-}
+$smarty->assign('msgOk',(isset($params['msgOk'])?$params['msgOk']:null));
+$smarty->assign('msgNOK',(isset($params['msgNOK'])?$params['msgNOK']:null));
 
 
-// Formulaire de renseignement de la clé
-$smarty->assign('formKeyStart' , $this->CreateFormStart($id, 'adminSavePrefs', $returnid));
-$smarty->assign('formKeyInputText' ,$this->CreateInputText($id, 'key', $key, '', 15));
-$smarty->assign('submitKey' , $this->CreateInputSubmit($id, 'submitKey', $this->Lang('submit_config')));
-$smarty->assign('formKeyEnd' , $this->CreateFormEnd());
+$arrayCategorie = $this->_getCategoriesForDropdown();
+$categories = $this->_getCategories();
+$status = $this->_getStates();
 
-// Formulaire de test de la clé
-$smarty->assign('formUrlStart' , $this->CreateFormStart($id, 'adminTestKey', $returnid));
-$smarty->assign('formUrlInputText' ,$this->CreateInputText($id, 'url', $url, 30, 150));
-$smarty->assign('formUrlInputHidden' ,$this->CreateInputHidden($id, 'create', '1'));
-$smarty->assign('submitUrl' , $this->CreateInputSubmit($id, 'submitUrl', $this->Lang('submit_test')));
-$smarty->assign('formUrlEnd' , $this->CreateFormEnd());
+//On ajoute l'onglet Contenu + Autres
+$tab_header = $this->StartTabHeaders();
+$tab_header.= $this->SetTabHeader('sites',$this->Lang('title_sites'),('sites' == $tab)?true:false);
+$tab_header.= $this->SetTabHeader('import',$this->Lang('title_import'),('import' == $tab)?true:false);
+$tab_header.= $this->SetTabHeader('check',$this->Lang('title_check'),('check' == $tab)?true:false);
+$tab_header.= $this->EndTabHeaders();
+
+$smarty->assign('tabs_start',$tab_header.$this->StartTabContent());
+$smarty->assign('tab_end',$this->EndTab());
+
+//Contenu de l'onglet contenu
+$smarty->assign('sitesTpl',$this->StartTab('sites', $params));
+$smarty->assign('importTpl',$this->StartTab('import', $params));
+$smarty->assign('checkTpl',$this->StartTab('check', $params));
+$smarty->assign('tabs_end',$this->EndTabContent());
 
 // pass a reference to the module, so smarty has access to module methods
-$smarty->assign_by_ref('mod',$this);
-$smarty->assign('key' , $key);
+$smarty->assign_by_ref('module',$this);
 
-echo $this->ProcessTemplate('admindefault.tpl');
+ /***************************************/
+ // Statut du compte Shotbot
+ $arrayStatut = substr($this->_fopen($this->_getUrlStatus()),3);
+ $arrayStatut = explode(':',$arrayStatut);
+ $statut = new stdclass;
+ $statut->used = $arrayStatut[1];
+ $statut->total = $arrayStatut[0];
+ $smarty->assign('statut_shotbot',$statut);
+
+ /*************************************/
+ // Recuperation des sites par défault les 20 derniers
+ 
+$smarty->assign('startFormFiltre' ,$this->CreateFormStart($id, 'defaultadmin', $returnid));
+$smarty->assign('endFormFiltre' , $this->CreateFormEnd());
+$smarty->assign('formDropDownCategorieSites' ,$this->CreateInputDropdown($id, 'categorieSites', $arrayCategorie,-1,$filtreCategorie));
+$smarty->assign('submitFiltre' ,$this->CreateInputSubmit($id, 'filtresubmit', $value='filtrer'));
+$smarty->assign('resetFiltre' ,$this->CreateLink($id, 'defaultadmin', $returnid, 'tout afficher', array()));
+
+if($filtreCategorie == null)
+{
+	$query = 'SELECT id, url, id_category, state FROM '.cms_db_prefix().'module_showroom_room ORDER BY date_submit DESC limit 0,?';
+	$param = array(20);	
+} else
+{
+	$query = 'SELECT id, url, id_category, state FROM '.cms_db_prefix().'module_showroom_room where id_category = ? ORDER BY date_submit DESC limit 0,?';
+	$param = array($filtreCategorie, 20);	
+}
+$result = $db->execute($query, $param);
+
+$listeImg = array();
+$i = 0;
+while ($row = $result->FetchRow())
+{
+	$url = $row['url'];
+	$myid =  $row['id'];
+	$idcategory = $row['id_category'];
+	$state = $row['state'];
+	
+	$img = new stdclass;
+	$img->id = $myid;
+	$img->url = $url;
+	$img->categorie = (isset($categories[$idcategory])?$categories[$idcategory]:"XXXXXXXX");
+	$img->state = (isset($status[$state])?$status[$state]:"XXX : $state");
+	
+	$img->miniature = $this->_getUrlCapture($url,"120");
+	$img->img = $this->_getUrlCapture($url,"1024");
+	$img->linkDelete = $this->CreateLink($id, 'adminDelete', $returnid, 'supprimer', array('idImg' => $myid ), 'Etes vous certain de vouloir supprimer?');
+	$img->linkRefresh = $this->CreateLink($id, 'adminRefresh', $returnid, 'refresh miniature', array('idImg' => $myid ));
+	$img->linkRetest = $this->CreateLink($id, 'adminRetest', $returnid, 'retester le site', array('idImg' => $myid ));
+	$img->linkEdition = $this->CreateLink($id, 'adminEdition', $returnid, 'modifier', array('idImg' => $myid ));
+	if($state != 0)
+		$img->linkStatNew = $this->CreateLink($id, 'adminChangeState', $returnid, 'D&eacute;finir &agrave; "nouveau"', array('idImg' => $myid,'state' => '0'));
+	if($state != 1)
+		$img->linkStatOk = $this->CreateLink($id, 'adminChangeState', $returnid, 'Valider le site', array('idImg' => $myid,'state' => '1'));
+	if($state != 2)
+		$img->linkStatKo = $this->CreateLink($id, 'adminChangeState', $returnid, 'D&eacute;sactiver le site', array('idImg' => $myid,'state' => '2'));
+	$img->rowclass = "row".(($i++%2)+1);
+	$listeImg[] = $img;
+}
+
+// Formulaire de renseignement de la clé
+$smarty->assign('listeImg' , $listeImg);
+$smarty->assign_by_ref('module',$this);
+
+ /*************************************/
+ // formulaire d'insertion de masse
+$smarty->assign('startFormImport',$this->CreateFormStart($id, 'admin_saveimport', $returnid));
+$smarty->assign('formDropDownCategorieImport' ,$this->CreateInputDropdown($id, 'categorie', $arrayCategorie,0));
+$smarty->assign('areaImport',$this->CreateTextArea(false,$id,'','area'));
+$smarty->assign('submitImport',$this->CreateInputSubmit($id, 'areasubmit', 'enregistrer'));
+$smarty->assign('endFormImport',$this->CreateFormEnd());
+
+ /*************************************/
+ // formulaire de check en masse
+$smarty->assign('startFormCheck',$this->CreateFormStart($id, 'adminCheck', $returnid));
+$smarty->assign('areaCheck',$this->CreateTextArea(false,$id,'','area'));
+$smarty->assign('submitCheck',$this->CreateInputSubmit($id, 'checksubmit', 'valider les sites'));
+$smarty->assign('endFormCheck',$this->CreateFormEnd());
+
+echo $this->ProcessTemplate('defaultadmin.tpl');
 ?>

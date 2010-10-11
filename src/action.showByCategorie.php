@@ -12,7 +12,7 @@ $db = &$gCms->GetDb();
 //inclusion des catégories
 require_once(dirname(__FILE__).'/action.showCategories.php');
 
-$query = 'SELECT url FROM '.cms_db_prefix().'module_showroom_room WHERE state = ? AND id_category=? ORDER BY date_submit DESC limit 0,?';
+$query = 'SELECT url FROM '.cms_db_prefix().'module_showroom_room WHERE state = ? AND id_category=? ORDER BY id_category ASC limit 0,?';
 $param = array("00", $params['categorie'], 99);	
 $result = $db->execute($query, $param);
 

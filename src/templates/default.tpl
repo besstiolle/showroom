@@ -1,4 +1,4 @@
-
+<p></p>
 {if $msgOk != null}<div style='width:50%;background:#080;color:#000;text-align:center;margin:auto;border-radius:5px;'>{$msgOk}</div>{/if}
 {if $msgNOk != null}<div style='width:50%;background:#faa;color:#000;text-align:center;margin:auto;border-radius:5px;'>{$msgNOk}</div>{/if}
 

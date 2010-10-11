@@ -112,6 +112,12 @@ class ShowRoom extends CMSModule
 	$this->CreateParameter('categorie', null, 'todo');
 	$this->SetParameterType('categorie',CLEAN_INT);
 	
+	$this->CreateParameter('idImg', null, 'todo');
+	$this->SetParameterType('idImg',CLEAN_INT);
+	
+	$this->CreateParameter('state', null, 'todo');
+	$this->SetParameterType('state',CLEAN_INT);
+	
 	$this->CreateParameter('texte', null, 'todo');
 	$this->SetParameterType('texte',CLEAN_STRING);
 	
@@ -130,6 +136,9 @@ class ShowRoom extends CMSModule
 	$this->CreateParameter('msgOk', null, 'todo');
 	$this->SetParameterType('msgOk',CLEAN_STRING);
 	
+	$this->CreateParameter('area', null, 'todo');
+	$this->SetParameterType('area',CLEAN_STRING);
+	
 	
   }
   
@@ -142,7 +151,9 @@ class ShowRoom extends CMSModule
 	{
 		$content = $params["content"];
 				
-		$script = '<script language="javascript" type="text/javascript" src="./modules/ShowRoom/js/fancybox/jquery.mousewheel-3.0.2.pack.js"></script>
+		$script = '
+		           <script language="javascript" type="text/javascript" src="./modules/ShowRoom/js/jquery.js"></script>
+				   <script language="javascript" type="text/javascript" src="./modules/ShowRoom/js/fancybox/jquery.mousewheel-3.0.2.pack.js"></script>
 				   <script language="javascript" type="text/javascript" src="./modules/ShowRoom/js/fancybox/jquery.fancybox-1.3.1.js"></script>
                    <link rel="stylesheet" type="text/css" href="./modules/ShowRoom/js/fancybox/jquery.fancybox-1.3.1.css" media="screen" />
 				   ';		
@@ -202,21 +213,10 @@ class ShowRoom extends CMSModule
   
   function _getCategoriesForDropdown()
   {	
-	return array("Administrations publiques, collectivit&eacute;s locales"=>"1",
-				"Arts et culture"=>"2",
-				"Associations, clubs, organisation caritative"=>"3",
-				"Blogs et sites personnels"=>"4",
-				"Entreprises, artisans, commer&ccedil;ant"=>"5",
-				"&Eacute;v&egrave;nementiel"=>"6",
-				"H&ocirc;tels, restaurants, gastronomie"=>"7",
-				"Open-source et Culture Libre"=>"8",
-				"Politique"=>"9",
-				"Presse, m&eacute;dias, tv, journaux"=>"10",
-				"Sant&eacute;, beaut&eacute;, bien &ecirc;tre"=>"11",
-				"Sports & M&eacute;caniques"=>"12");
-	}	
+	return array_flip($this->_getCategories());
+  }	
 	
-	function _getCategories()
+  function _getCategories()
   {	
 	return array("1"=>"Administrations publiques, collectivit&eacute;s locales",
 				"2"=>"Arts et culture",
@@ -225,11 +225,12 @@ class ShowRoom extends CMSModule
 				"5"=>"Entreprises, artisans, commer&ccedil;ant",
 				"6"=>"&Eacute;v&egrave;nementiel",
 				"7"=>"H&ocirc;tels, restaurants, gastronomie",
-				"8"=>"Open-source et Culture Libre",
-				"9"=>"Politique",
-				"10"=>"Presse, m&eacute;dias, tv, journaux",
-				"11"=>"Sant&eacute;, beaut&eacute;, bien &ecirc;tre",
-				"12"=>"Sports & M&eacute;caniques");
+				"8"=>"Loisir/Tourisme",
+				"9"=>"Open-source et Culture Libre",
+				"10"=>"Politique",
+				"11"=>"Presse, m&eacute;dias, tv, journaux",
+				"12"=>"Sant&eacute;, beaut&eacute;, bien &ecirc;tre",
+				"13"=>"Sports &amp; M&eacute;caniques");
 	}
 	/*
 	echo "test de l'URL : ".$params['url']."<br/>";
@@ -277,9 +278,9 @@ echo "$content";
   
    function _getStates()
    {
-	return array("00"=>"new",
-					"01"=>"valid&eacute;",
-					"02"=>"inactiv&eacute;");
+	return array("0"=>"new",
+					"1"=>"valid&eacute;",
+					"2"=>"inactiv&eacute;");
   }
   
   function _getStatesError()
@@ -313,8 +314,14 @@ echo "$content";
   
   function _isCmsMSsite($url)
   {
+	$content = $this->_fopen($url.'/admin/login.php');
+	return preg_match('/CMS Made Simple/i', $content); 
+  }
+  
+  function _isLicenceCmsMSsite($url, $testLight = false)
+  {
 	$content = $this->_fopen($url);
-	return preg_match('/<meta name="Generator" content="CMS Made Simple -/i', $content); 
+	return preg_match('/<meta name="Generator" content="CMS Made Simple/i', $content); 
   }
     
   function _fopen($url)

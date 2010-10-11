@@ -21,15 +21,16 @@
   </script>
 
 {/literal}
-
-<fieldset><legend>{$module->Lang('title_by_categorie',$categorie)}</legend>
+<p></p>
+<h2>{$module->Lang('title_by_categorie',$categorie)}</h2>
 {if count($listeImg) == 0}
 	<p>Aucun site n'est encore enregistr&eacute;</p>
 {else}
 	{foreach from=$listeImg item=img}
+		<p>&nbsp;</p>
+		<p><a href="{$img->url}">{$img->url}</a></p>
 		<a class="last" rel="last" title="{$img->url}" href="{$img->img}">
-			<img id='{$img->md5}' alt="last" src="{$img->miniature}">
+			<img alt='{$entry->url} est r&eacute;alis&eacute; avec Cms Made Simple' id='{$img->md5}' alt="last" src="{$img->miniature}">
 		</a>
 	{/foreach}
 {/if}
-</fieldset>

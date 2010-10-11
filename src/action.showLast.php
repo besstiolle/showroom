@@ -5,7 +5,7 @@ if (!isset($gCms)) exit;
 $db = &$gCms->GetDb();
 
 $query = 'SELECT url FROM '.cms_db_prefix().'module_showroom_room WHERE state = ? ORDER BY date_submit DESC limit 0,?';
-$param = array("00", 5);	
+$param = array("00", 4);	
 $result = $db->execute($query, $param);
 
 $listeImg = array();

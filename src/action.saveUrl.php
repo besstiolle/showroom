@@ -73,8 +73,12 @@ if(!$this->_isOpenUrl($url))
 	$this->Redirect($id, 'default', $returnid, array('msgNOk'=> 'url_non_exist','url' => $params['url'], 'categorie'=>$params['categorie']));
 
 //Si pas un CMSMS
-if(!$this->_isCmsMSsite($url))	
-	$this->Redirect($id, 'default', $returnid, array('msgNOk'=> 'url_non_cmsms','url' => $params['url'], 'categorie'=>$params['categorie']));
+//if(!$this->_isCmsMSsite($url))	
+//	$this->Redirect($id, 'default', $returnid, array('msgNOk'=> 'url_non_cmsms','url' => $params['url'], 'categorie'=>$params['categorie']));
+	
+//Si licence pirate
+if(!$this->_isLicenceCmsMSsite($url))	
+	$this->Redirect($id, 'default', $returnid, array('msgNOk'=> 'url_licence_pirate','url' => $params['url'], 'categorie'=>$params['categorie']));
 
 //Insertion en base
 $queryInsert = 'INSERT INTO '.cms_db_prefix().'module_showroom_room (id, url, text, id_user, id_category, state, date_submit) values (?,?,?,?,?,?,?)';

@@ -1,6 +1,7 @@
-<fieldset><legend>{$module->Lang('title_categories')}</legend>
+<p></p>
+<h2>{$module->Lang('title_categories')}</h2>
 {if count($listeCategorie) == 0}
-	<p>Aucun site n'est encore enregistr&eacute;</p>
+	<p>Aucun site n'est enregistr&eacute;</p>
 {else}
 	<ul>
 	{foreach from=$listeCategorie item=categorie}
@@ -8,4 +9,3 @@
 	{/foreach}
 	</ul>
 {/if}
-</fieldset>
