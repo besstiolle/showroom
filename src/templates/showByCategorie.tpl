@@ -28,9 +28,9 @@
 {else}
 	{foreach from=$listeImg item=img}
 		<p>&nbsp;</p>
-		<p><a href="{$img->url}">{$img->url}</a></p>
+		<p><a target='_blank' href="{$img->url}">{$img->url}</a></p>
 		<a class="last" rel="last" title="{$img->url}" href="{$img->img}">
-			<img alt='{$entry->url} est r&eacute;alis&eacute; avec Cms Made Simple' id='{$img->md5}' alt="last" src="{$img->miniature}">
+			<img class='shadow' alt='{$entry->url} est r&eacute;alis&eacute; avec Cms Made Simple' id='{$img->md5}' alt="last" src="{$img->miniature}">
 		</a>
 	{/foreach}
 {/if}
