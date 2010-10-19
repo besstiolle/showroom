@@ -96,7 +96,7 @@ class ShowRoom extends CMSModule
 
   function MinimumCMSVersion()
   {
-    return "1.5";
+    return "1.7.0";
   }
   
   function MaximumCMSVersion()
@@ -106,7 +106,16 @@ class ShowRoom extends CMSModule
   
   function SetParameters()
   {
-    $this->RegisterModulePlugin();
+    //utilisation en {Showroom}
+	$this->RegisterModulePlugin();
+	
+	//PrettyUrl
+	$this->RegisterRoute('/showroom\/(?P<categorie>[0-9]+)\/(?P<returnid>[0-9]+)\/(?P<none2>[a-zA-Z_ ,]+)\/(?P<none>[a-zA-Z_ ,]+)$/',
+		 array('action'=>'showByCategorie'));
+	/*$this->RegisterRoute('/showroom\/(?P<categorie>[0-9]+)\/(?P<returnid>[0-9]+)\/(?P<none>[a-zA-Z_ ,]+)\/(?P<none>[a-zA-Z_ ,]+)$/',
+		 array('action'=>'default'));*/
+	
+	//Securite
 	$this->RestrictUnknownParams();
 	
 	$this->CreateParameter('categorie', null, 'todo');
@@ -138,6 +147,12 @@ class ShowRoom extends CMSModule
 	
 	$this->CreateParameter('area', null, 'todo');
 	$this->SetParameterType('area',CLEAN_STRING);
+	
+	//depotoire
+	$this->CreateParameter('none', null, 'todo');
+	$this->SetParameterType('none',CLEAN_STRING);
+	$this->CreateParameter('none2', null, 'todo');
+	$this->SetParameterType('none2',CLEAN_STRING);
 	
 	
   }

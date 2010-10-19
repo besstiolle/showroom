@@ -15,10 +15,15 @@ while ($row = $result->FetchRow())
 	$compteur = $row['compteur'];
 	$idcategorie = $row['id_category']; 
 	
+//	$libelleCategorieSansAccent = strtr($categories[$idcategorie],'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ','aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+
+	$libelleCategorieSansAccent = html_entity_decode($categories[$idcategorie]);
+	$libelleCategorieSansAccent = strtr($libelleCategorieSansAccent,'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ','aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+	
 	$myCategorie = new stdclass;
 	$myCategorie->compteur = $compteur;
 	$myCategorie->categorie = $categories[$idcategorie];
-	$myCategorie->link =  $this->CreateLink($id, 'showByCategorie', $returnid, $categories[$idcategorie], array('categorie'=>$idcategorie));
+	$myCategorie->link =  $this->CreateLink($id, 'showByCategorie', $returnid, $categories[$idcategorie], array('categorie'=>$idcategorie),'',false,false,'',false,"showroom/$idcategorie/$returnid/Realisations Cms Made Simple/$libelleCategorieSansAccent");
 	$listeCategorie[] = $myCategorie;
 }
 
