@@ -112,8 +112,6 @@ class ShowRoom extends CMSModule
 	//PrettyUrl
 	$this->RegisterRoute('/showroom\/(?P<categorie>[0-9]+)\/(?P<returnid>[0-9]+)\/(?P<none2>[a-zA-Z_ ,]+)\/(?P<none>[a-zA-Z_ ,]+)$/',
 		 array('action'=>'showByCategorie'));
-	/*$this->RegisterRoute('/showroom\/(?P<categorie>[0-9]+)\/(?P<returnid>[0-9]+)\/(?P<none>[a-zA-Z_ ,]+)\/(?P<none>[a-zA-Z_ ,]+)$/',
-		 array('action'=>'default'));*/
 	
 	//Securite
 	$this->RestrictUnknownParams();
