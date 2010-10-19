@@ -1,19 +1,24 @@
 <?php
 #-------------------------------------------------------------------------
-# Module: OpenStatisticsCommunity - un client lege envoyant toute une serie de 
-#         statistiques de maniere anonyme sur l'utilisation faites de 
-#         Cms Made Simple. Pour toute information, consultez la page d'accueil 
-#         du projet : http://www.cmsmadesimple.fr/statistiques
-# Version: beta de Kevin Danezis Aka "Bess"
+# Module: ShowRoom - Module proposant un systeme de showroom publique avec 
+#			possibilite d'ajouter des urls de maniere annonyme pour le CMS
+#           Cms Made Simple
+#			
+#  Attention : ce projet a ete cree specifiquement pour le site www.cmsmadesimple.fr 
+#				Toute utilisation de votre part necessitera des modifications dans les fichiers !
+#
+# Version: de Kevin Danezis Aka "Bess"
 # Author can be join on the french forum : http://www.cmsmadesimple.fr/forum 
-#        or by email : statistiques [plop] cmsmadesimple [plap] fr
-# Method: action.defaultadmin.class
+#        or by email : contact [plop] furie [plap] be
+#
+# The discussion page around the module : http://www.cmsmadesimple.fr/forum/viewtopic.php?id=2958
+# The author's git page is : http://github.com/besstiolle
+# The module's git page is : http://github.com/besstiolle/showroom
+# The module's demo page is : http://www.cmsmadesimple.fr/showroom
+#
 #-------------------------------------------------------------------------
 # CMS - CMS Made Simple is (c) 2005 by Ted Kulp (wishy@cmsmadesimple.org)
 # This project's homepage is: http://www.cmsmadesimple.org
-# The module's homepage is: http://www.cmsmadesimple.fr/forum/viewtopic.php?id=2908
-# The module's forge id : http://dev.cmsmadesimple.org/projects/osc
-# The statistiques homepage is: http://www.cmsmadesimple.fr/statistiques
 #-------------------------------------------------------------------------
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

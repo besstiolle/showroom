@@ -1,16 +1,24 @@
 <?php
 #-------------------------------------------------------------------------
-# Module: Shotbot - API permettant de generer des miniatures de sites internet en divers format
-#				Url du projet source : http://www.shotbot.fr
+# Module: ShowRoom - Module proposant un systeme de showroom publique avec 
+#			possibilite d'ajouter des urls de maniere annonyme pour le CMS
+#           Cms Made Simple
+#			
+#  Attention : ce projet a ete cree specifiquement pour le site www.cmsmadesimple.fr 
+#				Toute utilisation de votre part necessitera des modifications dans les fichiers !
+#
 # Version: de Kevin Danezis Aka "Bess"
 # Author can be join on the french forum : http://www.cmsmadesimple.fr/forum 
 #        or by email : contact [plop] furie [plap] be
-# Method: Shotbot.module.class
+#
+# The discussion page around the module : http://www.cmsmadesimple.fr/forum/viewtopic.php?id=2958
+# The author's git page is : http://github.com/besstiolle
+# The module's git page is : http://github.com/besstiolle/showroom
+# The module's demo page is : http://www.cmsmadesimple.fr/showroom
+#
 #-------------------------------------------------------------------------
 # CMS - CMS Made Simple is (c) 2005 by Ted Kulp (wishy@cmsmadesimple.org)
 # This project's homepage is: http://www.cmsmadesimple.org
-# The module's homepage is: http://www.cmsmadesimple.fr/forum/viewtopic.php?id=2908
-# The module's forge id : http://dev.cmsmadesimple.org/projects/shotbot
 #-------------------------------------------------------------------------
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
