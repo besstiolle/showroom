@@ -54,11 +54,14 @@ while ($row = $result->FetchRow())
 
 	$libelleCategorieSansAccent = html_entity_decode($categories[$idcategorie]);
 	$libelleCategorieSansAccent = strtr($libelleCategorieSansAccent,'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ','aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+	$libelleCategorieSansAccent = preg_replace('/[^a-z0-9-_]+/i','_',$libelleCategorieSansAccent);
+    $libelleCategorieSansAccent = trim($libelleCategorieSansAccent, '_');
+
 	
 	$myCategorie = new stdclass;
 	$myCategorie->compteur = $compteur;
 	$myCategorie->categorie = $categories[$idcategorie];
-	$myCategorie->link =  $this->CreateLink($id, 'showByCategorie', $returnid, $categories[$idcategorie], array('categorie'=>$idcategorie),'',false,false,'',false,"showroom/$idcategorie/$returnid/Realisations Cms Made Simple/$libelleCategorieSansAccent");
+	$myCategorie->link =  $this->CreateLink($id, 'showByCategorie', $returnid, $categories[$idcategorie], array('categorie'=>$idcategorie),'',false,false,'',false,"showroom/$idcategorie/$returnid/Realisations_Cms_Made_Simple/$libelleCategorieSansAccent");
 	$listeCategorie[] = $myCategorie;
 }
 

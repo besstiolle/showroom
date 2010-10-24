@@ -171,13 +171,23 @@ class ShowRoom extends CMSModule
   function DoEvent($originator, $eventname, &$params)
 	{
 		$content = $params["content"];
-				
+		
+		if(strpos($content, ".fancybox(") === false)
+		{
+			return;
+		}
+		
+		global $gCms;
+		$config = $gCms->GetConfig();
+
 		$script = '
-		           <script language="javascript" type="text/javascript" src="./modules/ShowRoom/js/jquery.js"></script>
-				   <script language="javascript" type="text/javascript" src="./modules/ShowRoom/js/fancybox/jquery.mousewheel-3.0.2.pack.js"></script>
-				   <script language="javascript" type="text/javascript" src="./modules/ShowRoom/js/fancybox/jquery.fancybox-1.3.1.js"></script>
-                   <link rel="stylesheet" type="text/css" href="./modules/ShowRoom/js/fancybox/jquery.fancybox-1.3.1.css" media="screen" />
+<script language="javascript" type="text/javascript" src="'.$config['root_url'].'/modules/ShowRoom/js/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="'.$config['root_url'].'/modules/ShowRoom/js/fancybox/jquery.mousewheel-3.0.2.pack.js"></script>
+<script language="javascript" type="text/javascript" src="'.$config['root_url'].'/modules/ShowRoom/js/fancybox/jquery.fancybox-1.3.1.js"></script>
+<link rel="stylesheet" type="text/css" href="'.$config['root_url'].'/modules/ShowRoom/js/fancybox/jquery.fancybox-1.3.1.css" media="screen" />
 				   ';		
+		
+		$script = trim($script);
 				
 		if (function_exists('str_ireplace'))
 			$params["content"] = str_ireplace('<head>', "<head>\n$script\n", $content);
