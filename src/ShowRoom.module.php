@@ -107,18 +107,13 @@ class ShowRoom extends CMSModule
     return "1.7.0";
   }
   
-  function MaximumCMSVersion()
-  {
-    return "1.9";
-  }
-  
   function SetParameters()
   {
     //utilisation en {Showroom}
 	$this->RegisterModulePlugin();
 	
 	//PrettyUrl
-	$this->RegisterRoute('/showroom\/(?P<categorie>[0-9]+)\/(?P<returnid>[0-9]+)\/(?P<none2>[a-zA-Z_ ,]+)\/(?P<none>[a-zA-Z_ ,]+)$/',
+	$this->RegisterRoute('/showroom\/(?P<categorie>[0-9]+)\/(?P<returnid>[0-9]+)\/(?P<none2>[a-zA-Z_\- ,]+)\/(?P<none>[a-zA-Z_\- ,]+)$/',
 		 array('action'=>'showByCategorie'));
 	
 	//Securite
