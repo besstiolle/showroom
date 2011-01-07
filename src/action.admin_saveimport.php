@@ -63,7 +63,7 @@ foreach($listeUrl as $url)
 	$result = $db->getOne($query, $param);
 
 
-	//Si déjà en base
+	//Si deja en base
 	if($result !=0)
 	{
 		$alert .= "'".$url."' existe d&eacute;j&agrave; en base<br>\n";

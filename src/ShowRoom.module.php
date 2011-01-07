@@ -34,8 +34,17 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 # Or read it online: http://www.gnu.org/licenses/licenses.html#GPL
 #-------------------------------------------------------------------------
- 
-class ShowRoom extends CMSModule
+
+$cgextensions = cms_join_path($gCms->config['root_path'],'modules',
+			      'CGExtensions','CGExtensions.module.php');
+if( !is_readable( $cgextensions ) )
+{
+  echo '<h1><font color="red">ERROR: The CGExtensions module could not be found.</font></h1>';
+  return;
+}
+require_once($cgextensions);
+
+class ShowRoom extends CGExtensions
 {
   function GetName()
   {
@@ -49,7 +58,7 @@ class ShowRoom extends CMSModule
 
   function GetVersion()
   {
-    return '0.0.1';
+    return '0.0.2';
   }
   
   function GetHelp()
@@ -99,12 +108,12 @@ class ShowRoom extends CMSModule
   
   function GetDependencies()
   {
-    return array('Shotbot'=>'0.0.1');
+    return array('CGExtensions'=>'1.21.3','Shotbot'=>'0.0.1');
   }
 
   function MinimumCMSVersion()
   {
-    return "1.7.0";
+    return "1.9.1";
   }
   
   function SetParameters()
@@ -119,14 +128,14 @@ class ShowRoom extends CMSModule
 	//Securite
 	$this->RestrictUnknownParams();
 	
+	$this->CreateParameter('action', null, 'todo');
+	$this->SetParameterType('action',CLEAN_STRING);
+	
+	$this->CreateParameter('template', null, 'todo');
+	$this->SetParameterType('template',CLEAN_STRING);
+	
 	$this->CreateParameter('categorie', null, 'todo');
 	$this->SetParameterType('categorie',CLEAN_INT);
-	
-	$this->CreateParameter('idImg', null, 'todo');
-	$this->SetParameterType('idImg',CLEAN_INT);
-	
-	$this->CreateParameter('state', null, 'todo');
-	$this->SetParameterType('state',CLEAN_INT);
 	
 	$this->CreateParameter('texte', null, 'todo');
 	$this->SetParameterType('texte',CLEAN_STRING);
@@ -137,19 +146,13 @@ class ShowRoom extends CMSModule
 	$this->CreateParameter('captcha', null, 'todo');
 	$this->SetParameterType('captcha',CLEAN_STRING);
 	
-	$this->CreateParameter('submit', null, 'todo');
-	$this->SetParameterType('submit',CLEAN_STRING);
-	
 	$this->CreateParameter('msgNOk', null, 'todo');
 	$this->SetParameterType('msgNOk',CLEAN_STRING);
 	
 	$this->CreateParameter('msgOk', null, 'todo');
 	$this->SetParameterType('msgOk',CLEAN_STRING);
 	
-	$this->CreateParameter('area', null, 'todo');
-	$this->SetParameterType('area',CLEAN_STRING);
-	
-	//depotoire
+	//depotoire pour le re-routage
 	$this->CreateParameter('none', null, 'todo');
 	$this->SetParameterType('none',CLEAN_STRING);
 	$this->CreateParameter('none2', null, 'todo');
@@ -176,7 +179,7 @@ class ShowRoom extends CMSModule
 		$config = $gCms->GetConfig();
 
 		$script = '
-<script language="javascript" type="text/javascript" src="'.$config['root_url'].'/modules/ShowRoom/js/jquery.js"></script>
+
 <script language="javascript" type="text/javascript" src="'.$config['root_url'].'/modules/ShowRoom/js/fancybox/jquery.mousewheel-3.0.2.pack.js"></script>
 <script language="javascript" type="text/javascript" src="'.$config['root_url'].'/modules/ShowRoom/js/fancybox/jquery.fancybox-1.3.1.js"></script>
 <link rel="stylesheet" type="text/css" href="'.$config['root_url'].'/modules/ShowRoom/js/fancybox/jquery.fancybox-1.3.1.css" media="screen" />

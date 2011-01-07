@@ -37,7 +37,7 @@
 
 if (!isset($gCms)) exit;
 
-//On vérifie le captcha
+//On verifie le captcha
 if (isset($this->cms->modules['Captcha'])) {
 	$captcha = &$this->getModuleInstance('Captcha');
 	if (TRUE == empty($params['captcha']) || ! $captcha->CheckCaptcha($params['captcha'])) {
@@ -64,7 +64,7 @@ $param = array($url);
 $result = $db->getOne($query, $param);
 
 
-//Si déjà en base
+//Si deja en base
 if($result !=0)
 	$this->Redirect($id, 'default', $returnid, array('msgNOk'=> 'url_already_exist','url' => $params['url'], 'categorie'=>$params['categorie']));
 
@@ -89,7 +89,7 @@ $queryInsert = 'INSERT INTO '.cms_db_prefix().'module_showroom_room (id, url, te
 $sid = $db->GenID(cms_db_prefix().'module_oscs_rapport_tmp_seq');
 $param = array($sid, $url, '', 0, $categorie, "00", $this->_getTimeForDB($db));
 $result = $db->Execute($queryInsert, $param);
-if ($result === false){die("Database error durant l'insert de la donnée!");}
+if ($result === false){die("Database error durant l'insert de la donn&eacute;e!");}
 
 //Demande de nouvelle miniature
 $this->_fopen($this->_newUrlCapture($url));

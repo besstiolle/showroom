@@ -38,6 +38,7 @@
 			</tbody>
 		</table>
    {$tab_end}
+   
    {$importTpl}
 	  {$startFormImport}
 		{$formDropDownCategorieImport}<br/>
@@ -48,6 +49,23 @@
 	  {$startFormCheck}
 		{$areaCheck}<br/>{$submitCheck}
 	  {$endFormCheck}
+   {$tab_end}
+   
+    {$tpl_form}
+	  <h3>{$module->Lang('info_template_form')}</h3>
+	  {$listeGabaritForm}
+   {$tab_end}
+   {$tpl_showByCategorie}
+	  <h3>{$module->Lang('info_template_showByCategorie')}</h3>
+	  {$listeGabaritShowByCategorie}
+   {$tab_end}
+   {$tpl_showCategories}
+	  <h3>{$module->Lang('info_template_showCategories')}</h3>
+	  {$listeGabaritShowCategories}
+   {$tab_end}
+   {$tpl_showLast}
+	  <h3>{$module->Lang('info_template_showLast')}</h3>
+	  {$listeGabaritShowLast}
    {$tab_end}
 
 {$tabs_end}

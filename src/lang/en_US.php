@@ -18,7 +18,7 @@ $lang['text_form'] = '
 </ul>
 <p>Le ShowRoom est un lieu de partage des cr&eacute;ations de chacun, merci d\'en respecter le principe et de profiter du paysage mis &agrave; votre disposition</p>
 ';
-$lang['submit_url'] = 'Proposer le site';
+$lang['submit_url'] = 'Envoyer';
 
 $lang['title_last'] = 'Les derniers ajouts sur le ShowRoom';
 $lang['title_categories'] = 'Filtre par Cat&eacute;gorie';
@@ -27,9 +27,20 @@ $lang['title_sites'] = 'G&eacute;rer les sites';
 $lang['title_import'] = 'Importer en masse';
 $lang['title_check'] = 'V&eacute;rifier en masse';
 
+$lang['addedit_template_form'] = 'Ajouter/Editer un gabarit du formulaire';
+$lang['addedit_template_showByCategorie'] = 'Ajouter/Editer d\'affichage par cat&eacute;gorie';
+$lang['addedit_template_showCategories'] = 'Ajouter/Editer d\'affichage des cat&eacute;gories';
+$lang['addedit_template_showLast'] = 'Ajouter/Editer d\'affichage des derniers ins&eacute;r&eacute;s';
 
+$lang['title_template_form'] = 'Gabarits du formulaire';
+$lang['title_template_showByCategorie'] = 'Gabarits d\'affichage par cat&eacute;gorie';
+$lang['title_template_showCategories'] = 'Gabarits d\'affichage des cat&eacute;gories';
+$lang['title_template_showLast'] = 'Gabarits d\'affichage des derniers ins&eacute;r&eacute;s';
 
-
+$lang['info_template_form'] = 'Gabarits disponibles pour le formulaire';
+$lang['info_template_showByCategorie'] = 'Gabarits disponibles pour les affichages par cat&eacute;gorie';
+$lang['info_template_showCategories'] = 'Gabarits disponibles pour l\'affichage des cat&eacute;gories';
+$lang['info_template_showLast'] = 'Gabarits disponibles pour les affichages des derniers ins&eacute;r&eacute;s';
 
 
 $lang['url_empty'] = 'url du site non renseign&eacute;e';
@@ -50,9 +61,9 @@ $lang['th_url'] = 'url';
 $lang['th_state'] = '&Ecirc;tat';
 $lang['th_categorie'] = 'Cat&eacute;gorie';
 
+$lang['text_return'] = 'Back Home';
 
-
-$lang['moddescription'] = 'Ce module permet la g&egrave;n&egrave;ration de showroom à partir des sites internet propos&egrave; par le public';
+$lang['moddescription'] = 'Ce module permet la g&egrave;n&egrave;ration de showroom &agrave; partir des sites internet propos&egrave; par le public';
 $lang['changelog'] = '<ul>
 	<li>V0.0.1 : first release</li>
 </ul>

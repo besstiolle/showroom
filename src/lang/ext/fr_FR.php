@@ -52,7 +52,7 @@ $lang['th_categorie'] = 'Cat&eacute;gorie';
 
 
 
-$lang['moddescription'] = 'Ce module permet la g&egrave;n&egrave;ration de showroom à partir des sites internet propos&egrave; par le public';
+$lang['moddescription'] = 'Ce module permet la g&egrave;n&egrave;ration de showroom &agrave; partir des sites internet propos&egrave; par le public';
 $lang['changelog'] = '<ul>
 	<li>V0.0.1 : first release</li>
 </ul>

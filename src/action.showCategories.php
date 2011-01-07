@@ -49,8 +49,6 @@ while ($row = $result->FetchRow())
 {
 	$compteur = $row['compteur'];
 	$idcategorie = $row['id_category']; 
-	
-//	$libelleCategorieSansAccent = strtr($categories[$idcategorie],'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ','aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
 
 	$libelleCategorieSansAccent = html_entity_decode($categories[$idcategorie]);
 	$libelleCategorieSansAccent = strtr($libelleCategorieSansAccent,'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ','aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
@@ -65,12 +63,20 @@ while ($row = $result->FetchRow())
 	$listeCategorie[] = $myCategorie;
 }
 
-// Formulaire de renseignement de la clé
+// Formulaire de renseignement de la cle
 $smarty->assign('listeCategorie' , $listeCategorie);
 $smarty->assign_by_ref('module',$this);
 
-echo $this->ProcessTemplate('showCategories.tpl');
+//echo $this->ProcessTemplate('showCategories.tpl');
 
-
+#Display template
+echo "<!-- Displaying SHOWROOM Module -->\n";
+$template = 'showCategories'.$this->GetPreference('current_showCategories_template');
+if (isset($params['template']))
+  {
+    $template = 'showCategories'.$params['template'];
+  }
+echo $this->ProcessTemplateFromDatabase($template);
+echo "<!-- END SHOWROOM Module -->\n";
 
 ?>

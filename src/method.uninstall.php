@@ -47,6 +47,8 @@ $dict->ExecuteSQLArray($sqlarray);
 // remove the sequence
 $db->DropSequence( cms_db_prefix()."module_showroom_room_seq" );
 
+$this->DeleteTemplate();
+$this->RemovePreference();
 
 $this->RemovePermission('Set ShowRoom Prefs');
 

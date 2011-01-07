@@ -5,7 +5,7 @@
 <fieldset><legend>{$module->Lang('title_form')}</legend>
 {$formStart}
 
-	<p>{$module->Lang('text_form')}</p>
+	{$module->Lang('text_form')}
 	<p>http://{$formInputTextUrl}</p>
 	<p>{$formDropDownCategorie}</p>
 	{if $captcha != null}

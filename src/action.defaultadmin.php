@@ -59,6 +59,11 @@ $tab_header = $this->StartTabHeaders();
 $tab_header.= $this->SetTabHeader('sites',$this->Lang('title_sites'),('sites' == $tab)?true:false);
 $tab_header.= $this->SetTabHeader('import',$this->Lang('title_import'),('import' == $tab)?true:false);
 $tab_header.= $this->SetTabHeader('check',$this->Lang('title_check'),('check' == $tab)?true:false);
+$tab_header.= $this->SetTabHeader('templateform',$this->Lang('title_template_form'));//,('templateform' == $tab)?true:false);
+$tab_header.= $this->SetTabHeader('templateshowbycategorie',$this->Lang('title_template_showByCategorie'));//,('templateshowbycategorie' == $tab)?true:false);
+$tab_header.= $this->SetTabHeader('templateshowcategories',$this->Lang('title_template_showCategories'));//,('templateshowcategories' == $tab)?true:false);
+$tab_header.= $this->SetTabHeader('templateshowlast',$this->Lang('title_template_showLast'));//,('templateshowlast' == $tab)?true:false);
+
 $tab_header.= $this->EndTabHeaders();
 
 $smarty->assign('tabs_start',$tab_header.$this->StartTabContent());
@@ -66,12 +71,55 @@ $smarty->assign('tab_end',$this->EndTab());
 
 //Contenu de l'onglet contenu
 $smarty->assign('sitesTpl',$this->StartTab('sites', $params));
+$smarty->assign('tpl_form',$this->StartTab('templateform', $params));
+$smarty->assign('tpl_showByCategorie',$this->StartTab('templateshowbycategorie', $params));
+$smarty->assign('tpl_showCategories',$this->StartTab('templateshowcategories', $params));
+$smarty->assign('tpl_showLast',$this->StartTab('templateshowlast', $params));
 $smarty->assign('importTpl',$this->StartTab('import', $params));
 $smarty->assign('checkTpl',$this->StartTab('check', $params));
 $smarty->assign('tabs_end',$this->EndTabContent());
 
 // pass a reference to the module, so smarty has access to module methods
 $smarty->assign_by_ref('module',$this);
+
+ /***************************************/
+ // Liste des Gabarits
+   /*
+   * Part of the multiple database template functionality
+   * this function provides an interface for adding, editing,
+   * deleting and marking active all templates that match
+   * a prefix.
+   *
+   * @param id = module id (pass in the value from doaction)
+   * @param returnid = destination page id
+   * @param prefix = the template prefix
+   * @param defaulttemplatepref = The name of the preference containing the system default template
+   * @param active_tab = The tab to return to
+   * @param defaultprefname = The name of the preference that contains the name of the current default template
+   * @param title = Title text to display in the add/edit template form
+   * @param inf = Information text to display in the add/edit template form
+   * @param destaction = The action to return to.
+   */
+ $smarty->assign('listeGabaritForm',$this->ShowTemplateList($id,$returnid,'form',
+										 'default_form_template_contents',
+										 'templateform',
+										 'current_form_template',
+										 $this->Lang('addedit_template_form')));
+ $smarty->assign('listeGabaritShowByCategorie',$this->ShowTemplateList($id,$returnid,'showByCategorie',
+										 'default_showByCategorie_template_contents',
+										 'templateshowbycategorie',
+										 'current_showByCategorie_template',
+										 $this->Lang('addedit_template_showByCategorie')));
+ $smarty->assign('listeGabaritShowCategories',$this->ShowTemplateList($id,$returnid,'showCategories',
+										 'default_showCategories_template_contents',
+										 'templateshowcategories',
+										 'current_showCategories_template',
+										 $this->Lang('addedit_template_showCategories')));
+ $smarty->assign('listeGabaritShowLast',$this->ShowTemplateList($id,$returnid,'showLast',
+										 'default_showLast_template_contents',
+										 'templateshowlast',
+										 'current_showLast_template',
+										 $this->Lang('addedit_template_showLast')));
 
  /***************************************/
  // Statut du compte Shotbot
@@ -83,7 +131,7 @@ $smarty->assign_by_ref('module',$this);
  $smarty->assign('statut_shotbot',$statut);
 
  /*************************************/
- // Recuperation des sites par défault les 20 derniers
+ // Recuperation des sites par default les 20 derniers
  
 $smarty->assign('startFormFiltre' ,$this->CreateFormStart($id, 'defaultadmin', $returnid));
 $smarty->assign('endFormFiltre' , $this->CreateFormEnd());
@@ -133,7 +181,7 @@ while ($row = $result->FetchRow())
 	$listeImg[] = $img;
 }
 
-// Formulaire de renseignement de la clé
+// Formulaire de renseignement de la cle
 $smarty->assign('listeImg' , $listeImg);
 $smarty->assign_by_ref('module',$this);
 
