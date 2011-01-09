@@ -11,13 +11,16 @@
 # Author can be join on the french forum : http://www.cmsmadesimple.fr/forum 
 #        or by email : contact [plop] furie [plap] be
 #
-# The discussion page around the module : http://www.cmsmadesimple.fr/forum/viewtopic.php?id=2958
-# The author's git page is : http://github.com/besstiolle
-# The module's git page is : http://github.com/besstiolle/showroom
+# The module's download page is : http://dev.cmsmadesimple.org/project/files/xxxxxx
 # The module's demo page is : http://www.cmsmadesimple.fr/showroom
 #
+# The discussion page around the module : http://www.cmsmadesimple.fr/forum/viewtopic.php?id=2958
+# The author's GIT page is : https://github.com/besstiolle
+# The module's GIT page is : https://github.com/besstiolle/showroom
+# The module's SVN page is : N/A
+#
 #-------------------------------------------------------------------------
-# CMS - CMS Made Simple is (c) 2005 by Ted Kulp (wishy@cmsmadesimple.org)
+# CMS - CMS Made Simple is (c) 2004-2011 by Ted Kulp (wishy@cmsmadesimple.org)
 # This project's homepage is: http://www.cmsmadesimple.org
 #-------------------------------------------------------------------------
 # This program is free software; you can redistribute it and/or modify
