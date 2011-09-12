@@ -1,15 +1,6 @@
 <?php
 if (!isset($gCms)) exit;
 
-//On verifie le captcha
-if (isset($this->cms->modules['Captcha'])) {
-	$captcha = &$this->getModuleInstance('Captcha');
-	if (TRUE == empty($params['captcha']) || ! $captcha->CheckCaptcha($params['captcha'])) {
-		$this->Redirect($id, 'default', $returnid, array('msgNOk'=> 'captcha_ko','url' => $params['url'], 'categorie'=>$params['categorie']));
-	}
-}
-
-
 $categories = $this->_getCategories();
 
 if(empty($params['url']))

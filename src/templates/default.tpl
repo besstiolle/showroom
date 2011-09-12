@@ -8,11 +8,6 @@
 	{$module->Lang('text_form')}
 	<p>http://{$formInputTextUrl}</p>
 	<p>{$formDropDownCategorie}</p>
-	{if $captcha != null}
-	<p>{$captcha}</p>
-	<p>Retapez la chaine captcha : {$formInputCaptcha}</p>
-	{/if}
-	{*<p>{$formAreaText}</p>*}
 	<p>{$submit}</p>
 
 {$formEnd}

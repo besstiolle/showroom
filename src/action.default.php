@@ -13,22 +13,10 @@ if(isset($params['msgNOk']))
 //ajouter une categorie vide	
 $arrayCategorie = array_merge(array("s&eacute;lectionnez la cat&eacute;gorie"=>"0"), $this->_getCategoriesForDropdown());
 
-//On propose un captcha
-if(isset($this->cms->modules['Captcha']))
-{
-	$captcha = &$this->getModuleInstance('Captcha'); 
-	$captchafield = $captcha->getCaptcha();
-} else
-{
-	$captchafield = "";
-}
 	
 // Formulaire de renseignement de la cle
 $smarty->assign('formStart' , $this->CreateFormStart($id, 'saveUrl', $returnid));
 $smarty->assign('formInputTextUrl' ,$this->CreateInputText($id, 'url',(empty($params['url'])?'www.cmsmadesimple.fr':$params['url']), 42, '50'));
-//$smarty->assign('formAreaText' ,$this->CreateTextArea($false, $id, $params['texte'], 'texte', '', '', '', '', $cols='80', $rows='15'));
-$smarty->assign('captcha' ,$captchafield);
-$smarty->assign('formInputCaptcha' ,$this->CreateInputText($id, 'captcha','', 20, '10'));
 $smarty->assign('formDropDownCategorie' ,$this->CreateInputDropdown($id, 'categorie', $arrayCategorie, '' ,$params['categorie']));
 $smarty->assign('submit' , $this->CreateInputSubmit($id, 'submit', $this->Lang('submit_url')));
 $smarty->assign('formEnd' , $this->CreateFormEnd());

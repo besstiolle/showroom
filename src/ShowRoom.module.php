@@ -11,16 +11,13 @@
 # Author can be join on the french forum : http://www.cmsmadesimple.fr/forum 
 #        or by email : contact [plop] furie [plap] be
 #
-# The module's download page is : http://dev.cmsmadesimple.org/project/files/xxxxxx
+# The discussion page around the module : http://www.cmsmadesimple.fr/forum/viewtopic.php?id=2958
+# The author's git page is : http://github.com/besstiolle
+# The module's git page is : http://github.com/besstiolle/showroom
 # The module's demo page is : http://www.cmsmadesimple.fr/showroom
 #
-# The discussion page around the module : http://www.cmsmadesimple.fr/forum/viewtopic.php?id=2958
-# The author's GIT page is : https://github.com/besstiolle
-# The module's GIT page is : https://github.com/besstiolle/showroom
-# The module's SVN page is : N/A
-#
 #-------------------------------------------------------------------------
-# CMS - CMS Made Simple is (c) 2004-2011 by Ted Kulp (wishy@cmsmadesimple.org)
+# CMS - CMS Made Simple is (c) 2005 by Ted Kulp (wishy@cmsmadesimple.org)
 # This project's homepage is: http://www.cmsmadesimple.org
 #-------------------------------------------------------------------------
 # This program is free software; you can redistribute it and/or modify
@@ -61,7 +58,7 @@ class ShowRoom extends CGExtensions
 
   function GetVersion()
   {
-    return '0.0.2';
+    return '1.0.0';
   }
   
   function GetHelp()
@@ -106,17 +103,17 @@ class ShowRoom extends CGExtensions
 
   function VisibleToAdminUser()
   {
-    return true;
+    return $this->CheckPermission('Set ShowRoom Prefs');
   }
   
   function GetDependencies()
   {
-    return array('CGExtensions'=>'1.21.3','Shotbot'=>'0.0.1');
+    return array('CGExtensions'=>'1.21.3','Shotbot'=>'1.0.0');
   }
 
   function MinimumCMSVersion()
   {
-    return "1.9.1";
+    return "1.7.0";
   }
   
   function SetParameters()
@@ -145,9 +142,6 @@ class ShowRoom extends CGExtensions
 	
 	$this->CreateParameter('url', null, 'todo');
 	$this->SetParameterType('url',CLEAN_STRING);
-	
-	$this->CreateParameter('captcha', null, 'todo');
-	$this->SetParameterType('captcha',CLEAN_STRING);
 	
 	$this->CreateParameter('msgNOk', null, 'todo');
 	$this->SetParameterType('msgNOk',CLEAN_STRING);
@@ -214,7 +208,14 @@ class ShowRoom extends CGExtensions
   function _shotbotApi()
   {
 	global $gCms;
-	$shotbotApi =& $gCms->modules["Shotbot"]['object'];
+	if(isset($gCms->modules))
+	{
+		$shotbotApi = $gCms->modules['Shotbot']['object'];
+	} else
+	{
+		$modops = cmsms()->GetModuleOperations();
+		$shotbotApi = $modops->get_module_instance('Shotbot');
+	}
 	if($shotbotApi == null)
 	{
 		echo "Shotbot module not found !";
